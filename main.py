@@ -7,21 +7,22 @@ def are_matching(left, right):
 
 def find_mismatch(text):
     opening_brackets_stack = []
-    for i, next_char in enumerate(text):
-        if next_char in "([{":
-            opening_brackets_stack.append(Bracket(next_char, i + 1))    
-        if next_char in ")]}":
-            if not opening_brackets_stack or not are_matching(opening_brackets_stack.pop().char, next_char):
+    for i, char in enumerate(text):
+        if char in "([{":
+            opening_brackets_stack.append(Bracket(char, i + 1))
+        elif char in ")]}":
+            if not opening_brackets_stack or not are_matching(opening_brackets_stack.pop().char, char):
                 return i + 1
     if opening_brackets_stack:
         return opening_brackets_stack[0].position
-    return "Success"
+    else:
+        return "Success"
 
 def main():
-    text = input()
+    text = input().strip()
     if text.startswith("I"):
         mismatch = find_mismatch(text[1:])
         print(mismatch)
-
+        
 if __name__ == "__main__":
     main()
