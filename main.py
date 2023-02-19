@@ -6,23 +6,27 @@ def are_matching(left, right):
     return (left + right) in ["()", "[]", "{}"]
 
 def find_mismatch(text):
+    text = input()
     opening_brackets_stack = []
-    for i, char in enumerate(text):
-        if char in "([{":
-            opening_brackets_stack.append(Bracket(char, i + 1))
-        elif char in ")]}":
-            if not opening_brackets_stack or not are_matching(opening_brackets_stack.pop().char, char):
-                return i + 1
+    for i, next in enumerate(text):
+        if next in "([{":
+            # Process opening bracket, write your code here
+            opening_brackets_stack.append(Bracket(next, i + 1))    
+        if next in ")]}":
+            # Process closing bracket, write your code here
+            if not opening_brackets_stack or not are_matching(opening_brackets_stack.pop().char,next):
+                return i+ 1
     if opening_brackets_stack:
         return opening_brackets_stack[0].position
-    else:
-        return "Success"
+    return  "Success"
 
 def main():
-    text = input().strip()
-    if text.startswith("I"):
-        mismatch = find_mismatch(text[1:])
-        print(mismatch)
-        
+    text = input()
+    if text[0] == "I":
+        text
+        mismatch = find_mismatch(text)
+# Printing answer, write your code here
+    print(mismatch)
+    
 if __name__ == "__main__":
     main()
